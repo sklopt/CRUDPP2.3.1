@@ -1,15 +1,16 @@
 package com.gilmanov.entity;
 
-import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment")
-    private Long id;
+    @GenericGenerator(name = "increment", strategy = "increment")
+    private long id;
     @Column(name = "name", nullable = false, length = 50)
     private String name;
     @Column(name = "surname", nullable = false, length = 50)
