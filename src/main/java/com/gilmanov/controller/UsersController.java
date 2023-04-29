@@ -1,17 +1,23 @@
 package com.gilmanov.controller;
 
+import com.gilmanov.dao.DaoException;
+import com.gilmanov.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-@RequestMapping("/crud")
 public class UsersController {
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
-    @ResponseBody
-    public String getCRUD(ModelMap model) {
-        return "My CRUD";
+    private final UserService service;
+    @Autowired
+    public UsersController(UserService service) {
+        this.service = service;
+    }
+
+    @GetMapping("/users")
+    public String getAllUsers(ModelMap model) throws DaoException {
+        model.addAttribute("users", service.getAllUsers());
+        return "users";
     }
 }

@@ -1,26 +1,41 @@
 package com.gilmanov;
 
 import com.gilmanov.config.WebConfig;
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
+public class App extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-public class App implements WebApplicationInitializer {
-    private final static String DISPATCHER = "dispatcher";
-
+    // Метод, указывающий на класс конфигурации
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-        ctx.register(WebConfig.class);
-        servletContext.addListener(new ContextLoaderListener(ctx));
-
-        ServletRegistration.Dynamic servlet = servletContext.addServlet(DISPATCHER, new DispatcherServlet(ctx));
-        servlet.addMapping("/");
-        servlet.setLoadOnStartup(1);
+    protected Class<?>[] getRootConfigClasses() {
+        return null;
     }
+
+
+    // Добавление конфигурации, в которой инициализируем ViewResolver, для корректного отображения jsp.
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class<?>[]{
+                WebConfig.class
+        };
+    }
+
+
+    /* Данный метод указывает url, на котором будет базироваться приложение */
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
+    }
+//    private final static String DISPATCHER = "dispatcher";
+//
+//    @Override
+//    public void onStartup(ServletContext servletContext) {
+//        AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
+//        ctx.register(WebConfig.class);
+//        servletContext.addListener(new ContextLoaderListener(ctx));
+//
+//        ServletRegistration.Dynamic servlet = servletContext.addServlet(DISPATCHER, new DispatcherServlet(ctx));
+//        servlet.addMapping("/");
+//        servlet.setLoadOnStartup(1);
+//    }
 }
