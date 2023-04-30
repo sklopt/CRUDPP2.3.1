@@ -24,16 +24,5 @@ public class App extends AbstractAnnotationConfigDispatcherServletInitializer {
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
-//    private final static String DISPATCHER = "dispatcher";
-//
-//    @Override
-//    public void onStartup(ServletContext servletContext) {
-//        AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-//        ctx.register(WebConfig.class);
-//        servletContext.addListener(new ContextLoaderListener(ctx));
-//
-//        ServletRegistration.Dynamic servlet = servletContext.addServlet(DISPATCHER, new DispatcherServlet(ctx));
-//        servlet.addMapping("/");
-//        servlet.setLoadOnStartup(1);
-//    }
+
 }
