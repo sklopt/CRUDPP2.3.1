@@ -17,24 +17,18 @@ public class UserDaoImpl implements UserDao {
         return this.entityManager;
     }
 
-
-//    static {
-//        listUsers.add(new User("Shamil", "Gilmanov", 37));
-//        listUsers.add(new User("Timur", "Gilmanov", 15));
-//    }
-
     @Override
-    public List<User> getAllUsers() throws DaoException {
-        return getEntityManager().createQuery("From User").getResultList();
+    public List<User> getAllUsers() {
+        return getEntityManager().createQuery("From User order by 1").getResultList();
     }
 
     @Override
-    public void saveUser(User user) throws DaoException {
+    public void saveUser(User user) {
         getEntityManager().persist(user);
     }
 
     @Override
-    public void removeUserById(long id) throws DaoException {
+    public void removeUserById(long id) {
         getEntityManager()
                 .createQuery("delete from User where id=: id")
                 .setParameter("id", id)
@@ -42,12 +36,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void changeUser(User user) throws DaoException {
+    public void changeUser(User user) {
         getEntityManager().merge(user);
     }
 
     @Override
-    public User getUserById(long id) throws DaoException {
+    public User getUserById(long id) {
         return getEntityManager().find(User.class, id);
     }
 }
