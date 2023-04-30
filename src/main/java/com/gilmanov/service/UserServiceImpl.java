@@ -6,9 +6,11 @@ import com.gilmanov.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
@@ -23,8 +25,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(String name, String surname, int age) throws DaoException {
-        userDao.saveUser(name, surname, age);
+    public void saveUser(User user) throws DaoException {
+        userDao.saveUser(user);
     }
 
     @Override
@@ -33,7 +35,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changeUser() throws DaoException {
-        userDao.changeUser();
+    public void changeUser(User user) throws DaoException {
+        userDao.changeUser(user);
+    }
+
+    @Override
+    public User getUserById(long id) throws DaoException {
+        return userDao.getUserById(id);
     }
 }
