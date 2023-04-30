@@ -11,7 +11,6 @@ public class App extends AbstractAnnotationConfigDispatcherServletInitializer {
         return null;
     }
 
-
     // Добавление конфигурации, в которой инициализируем ViewResolver, для корректного отображения jsp.
     @Override
     protected Class<?>[] getServletConfigClasses() {
@@ -19,7 +18,6 @@ public class App extends AbstractAnnotationConfigDispatcherServletInitializer {
                 WebConfig.class
         };
     }
-
 
     /* Данный метод указывает url, на котором будет базироваться приложение */
     @Override

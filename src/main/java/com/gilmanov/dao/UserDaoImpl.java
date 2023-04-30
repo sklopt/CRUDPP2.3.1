@@ -4,38 +4,50 @@ import com.gilmanov.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.PersistenceContext;
 import java.util.List;
-
+@SuppressWarnings("unchecked")
 @Repository
 public class UserDaoImpl implements UserDao {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    protected EntityManager getEntityManager() {
+        return this.entityManager;
+    }
 
 
 //    static {
 //        listUsers.add(new User("Shamil", "Gilmanov", 37));
 //        listUsers.add(new User("Timur", "Gilmanov", 15));
 //    }
-    EntityManager em;
+
     @Override
     public List<User> getAllUsers() throws DaoException {
-        List<User> listUser = null;
-        Query q = em.createNativeQuery("SELECT * FROM users", User.class);
-        listUser = (List<User>) q.getResultList();
-        return listUser;
+        return getEntityManager().createQuery("From User").getResultList();
     }
 
     @Override
-    public void saveUser(String name, String surname, int age) throws DaoException {
-
+    public void saveUser(User user) throws DaoException {
+        getEntityManager().persist(user);
     }
 
     @Override
     public void removeUserById(long id) throws DaoException {
-
+        getEntityManager()
+                .createQuery("delete from User where id=: id")
+                .setParameter("id", id)
+                .executeUpdate();
     }
 
     @Override
-    public void changeUser() throws DaoException {
+    public void changeUser(User user) throws DaoException {
+        getEntityManager().merge(user);
+    }
 
+    @Override
+    public User getUserById(long id) throws DaoException {
+        return getEntityManager().find(User.class, id);
     }
 }

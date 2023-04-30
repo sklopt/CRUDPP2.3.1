@@ -8,9 +8,11 @@ import java.util.List;
 public interface UserService {
     List<User> getAllUsers() throws DaoException;
 
-    void saveUser(String name, String surname, int age) throws DaoException;
+    void saveUser(User user) throws DaoException;
 
     void removeUserById(long id) throws DaoException;
 
-    void changeUser() throws DaoException;
+    void changeUser(User user) throws DaoException;
+
+    User getUserById(long id) throws DaoException;
 }
