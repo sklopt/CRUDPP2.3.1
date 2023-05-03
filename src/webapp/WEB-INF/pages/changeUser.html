@@ -7,34 +7,34 @@
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 <body>
-<h2>Change user data</h2>
+<h2>Изменение данных пользователя</h2>
 <div>
 
   <form th:action="@{/users/change}" th:object="${user}" method="post">
     <input type="hidden" name="id" th:value="${user.getId()}">
     <fieldset>
-      <legend>User data</legend>
+      <legend>Данные пользователя</legend>
       <p>
-        <label th:for="name">Name</label>
+        <label th:for="name">Имя</label>
         <input type="text" name="name" th:id="name" th:value="${user.getName()}">
       </p>
       <p>
-        <label th:for="surame">Surname</label>
+        <label th:for="surame">Фамилия</label>
         <input type="text" name="surname" th:id="surname" th:value="${user.getSurname()}"><br/>
       </p>
       <p>
-        <label th:for="age">Age</label>
+        <label th:for="age">Возраст</label>
         <input type="text" name="age" th:id="age" th:value="${user.getAge()}"><br/>
       </p>
 
     </fieldset>
-    <button type="submit">Accept change user data</button>
+    <button type="submit" class="btn btn-outline-danger">Сохранить изменения</button>
   </form>
 
 
   <br/>
   <form th:action="@{/users}">
-    <button type="submit">Show all users</button>
+    <button type="submit">Назад</button>
   </form>
 </div>
 
