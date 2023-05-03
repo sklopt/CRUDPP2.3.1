@@ -1,7 +1,10 @@
 package com.gilmanov;
 
 import com.gilmanov.config.WebConfig;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
 
 public class App extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -25,4 +28,10 @@ public class App extends AbstractAnnotationConfigDispatcherServletInitializer {
         return new String[]{"/"};
     }
 
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        characterEncodingFilter.setForceEncoding(true);
+        return new Filter[]{characterEncodingFilter};
+    }
 }

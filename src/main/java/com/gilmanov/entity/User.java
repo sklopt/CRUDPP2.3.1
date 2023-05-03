@@ -11,11 +11,11 @@ public class User {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     private long id;
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "name", nullable = false, length = 500)
     private String name;
-    @Column(name = "surname", nullable = false, length = 50)
+    @Column(name = "surname", nullable = false, length = 500)
     private String surname;
-    @Column(name = "age", nullable = false, length = 50)
+    @Column(name = "age", nullable = false, length = 200)
     private int age;
 
     public User() {
