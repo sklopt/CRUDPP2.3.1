@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
@@ -25,16 +24,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void saveUser(User user) throws DaoException {
         userDao.saveUser(user);
     }
 
     @Override
+    @Transactional
     public void removeUserById(long id) throws DaoException {
         userDao.removeUserById(id);
     }
 
     @Override
+    @Transactional
     public void changeUser(User user) throws DaoException {
         userDao.changeUser(user);
     }
